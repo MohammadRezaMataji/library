@@ -1,0 +1,12 @@
+{% extends 'main.html' %}
+
+{% block content %}
+<h1>{{book.title}}</h1>
+<hr>
+{% for tag in book.tags.all %}
+    <span style="border: 2px solid blue">{{tag}}</span>
+{% endfor %}
+<hr>
+<br>
+<p>{{book.description}}</p>
+{% endblock content %}

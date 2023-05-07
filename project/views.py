@@ -1,23 +1,7 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from .models import Book
-Bookslist = [
-    {
-        'id': '1',
-        'title': 'MATH THEORY',
-        'description': 'The basic Theory of Math'
-    },
-    {
-        'id': '2',
-        'title': 'NEW LIFE',
-        'description': 'The view about New born'
-    },
-    {
-        'id': '3',
-        'title': 'Social',
-        'description': 'About Social Activity'
-    }
-]
+from .forms import BookForm
 
 def projects(request):
     Books = Book.objects.all()
@@ -28,4 +12,13 @@ def project(request,pk):
     bookObj = Book.objects.get(id= pk)
     return render(request,'project/project.html',{'book':bookObj})
 
-# Create your views here.
+def createbook(request):
+    form = BookForm
+
+    if request.method == 'POST':
+        form = BookForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('projects')
+    context = {'form': form}
+    return render(request,'project/book_form.html', context)

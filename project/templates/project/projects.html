@@ -3,9 +3,23 @@
 {% block content %}
 
 <h1>Books </h1>
-<ul>
-{% for book in books %}
-    <li>Title :<a href="{% url 'project' book.id %}"> {{book.title}} </a>--- {{book.created}}</li>
-{% endfor %}
-</ul>
+<table>
+    <tr>
+        <th>Book</th>
+        <th>Votes</th>
+        <th>Ratio</th>
+        <th>Create Time</th>
+        <th></th>
+    </tr>
+    {% for book in books %}
+        <tr>
+            <td>{{book.title}}</td>
+            <td>{{book.vote_total}}</td>
+            <td>{{book.vote_ratio}}</td>
+            <td>{{book.created}}</td>
+            <td><a href="{% url 'project' book.id %}">View</a></td>
+        </tr>
+    {% endfor %}
+
+</table>
 {% endblock content %}

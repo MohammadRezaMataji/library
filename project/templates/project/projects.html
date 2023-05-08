@@ -10,6 +10,7 @@
         <th>Ratio</th>
         <th>Create Time</th>
         <th></th>
+        <th></th>
     </tr>
     {% for book in books %}
         <tr>
@@ -17,6 +18,8 @@
             <td>{{book.vote_total}}</td>
             <td>{{book.vote_ratio}}</td>
             <td>{{book.created}}</td>
+            <td><a href="{% url 'update-book' book.id %}">Edit</a></td>
+            <td><a href="{% url 'delete-book' book.id %}">Delete</a></td>
             <td><a href="{% url 'project' book.id %}">View</a></td>
         </tr>
     {% endfor %}

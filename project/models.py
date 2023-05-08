@@ -5,7 +5,8 @@ import uuid
 class Book(models.Model):
     title = models.CharField(max_length=200)
     author = models.CharField(max_length=50)
-    description = models.TextField(max_length=400,null=True,blank=True)
+    description = models.TextField(max_length=400, null=True, blank=True)
+    book_image = models.ImageField(null=True, blank=True, default="cover-default--book.svg")
     demo_link = models.CharField(max_length=2000, null=True, blank=True)
     source_link = models.CharField(max_length=2000, null=True, blank=True)
     tags = models.ManyToManyField('Tag', blank=True)

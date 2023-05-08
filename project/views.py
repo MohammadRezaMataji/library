@@ -16,9 +16,29 @@ def createbook(request):
     form = BookForm
 
     if request.method == 'POST':
-        form = BookForm(request.POST)
+        form = BookForm(request.POST, request.FILES)
         if form.is_valid():
             form.save()
             return redirect('projects')
     context = {'form': form}
     return render(request,'project/book_form.html', context)
+
+def updatebook(request,pk):
+    book = Book.objects.get(id=pk )
+    form = BookForm(instance=book)
+
+    if request.method == 'POST':
+        form = BookForm(request.POST, request.FILES, instance=book)
+        if form.is_valid():
+            form.save()
+            return redirect('projects')
+    context = {'form': form}
+    return render(request,'project/book_form.html', context)
+
+def deletebook(request, pk):
+    book = Book.objects.get(id = pk)
+    if request.method == 'POST':
+        book.delete()
+        return redirect('projects')
+    context = {'object':book}
+    return render(request, 'project/delete_template.html', context)
